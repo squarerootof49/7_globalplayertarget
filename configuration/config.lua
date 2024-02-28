@@ -20,7 +20,7 @@ Config = {}
 
 --General configuration
 Config.locale = 'it'                                --Language. Current options: 'en' | 'it'
-Config.useCustomNotification = true                 --Wether (false) or not (true) to use ox_lib's notifications. If true, check functions.lua in the client folder.
+Config.useCustomNotification = false                --Wether (false) or not (true) to use ox_lib's notifications. If true, check functions.lua in the client folder.
 Config.useCustomProgbar = false                     --Wether (false) or not (true) to use ox_lib's progress bar. If true, check functions.lua in the client folder.
 Config.targetDistance = 2                           --Distance at which the target menu is visible. You might wanna change this.
 

@@ -21,7 +21,7 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-description 'Seven\'s ox_target-based global player target (GPT)'
+description 'Seven\'s ox_target global player target (GPT)'
 author 'Seven (azazel98x on Discord)'
 version '1.0.0'
 

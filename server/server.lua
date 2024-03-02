@@ -19,33 +19,41 @@
 
 local inv = exports.ox_inventory
 
-
-lib.callback.register("sn_globalPlayerTarget:searchPlayer", function(source, target)
+--Checks cb
+lib.callback.register("sn_globalPlayerTarget:runChecks", function(source, target)
 	--Saving source for tick safety, unsure how this works. Can i just use source all over?
 	local playerID = source
 
-	--Gets distance
-	local playerPos = GetEntityCoords(GetPlayerPed(playerID))
-	local targetPos = GetEntityCoords(GetPlayerPed(target))
-	local distance = #(playerPos - targetPos)
-
 	--Held weapon check
-	if not inv:GetCurrentWeapon(playerID) then
-		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['searchPlayerNoGun'], 'error', 5000)
+	if not IsHoldingWeapon(playerID) then
+		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoGun'], 'error', 5000)
 		return false
 	end
 
 	--Distance check
-	if distance > Config.searchPlayerDistance then
-		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['searchPlayerTooFar'], 'error', 5000)
+	if DistanceCheck(playerID, target) then
+		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerTooFar'], 'error', 5000)
 		return false
 	end
 
-	--Progbar trigger
-	local progbarSuccess = lib.callback.await('sn_globalPlayerTarget:progbar', source, Config.timeToSearch, Locale[Config.Locale]['searchPlayerProgbarLabel'], 'anim@gangops@facility@servers@bodysearch@', 'player_search')
-
-	if progbarSuccess then 
-		inv:forceOpenInventory(playerID, 'player', target)
-		return true
-	end
+	return true
 end)
+
+--Search player event
+RegisterNetEvent("sn_globalPlayerTarget:searchPlayer", function(target)
+	--Saving source for tick safety, unsure how this works. Can i just use source all over?
+	local playerID = source
+
+	--Player search
+	inv:forceOpenInventory(playerID, 'player', target)
+end)
+
+--Tie hands event
+RegisterNetEvent("sn_globalPlayerTarget:tieHands", function(target)
+	--Saving source for tick safety, unsure how this works. Can i just use source all over?
+	local playerID = source
+
+	--Player search
+	inv:forceOpenInventory(playerID, 'player', target)
+end)
+

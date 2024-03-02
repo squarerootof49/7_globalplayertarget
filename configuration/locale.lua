@@ -18,12 +18,14 @@
 
 Locale = {
         ['it'] = {
+                --Generali
+                ['playerNoHandsup'] = 'Il giocatore non ha le mani alzate!',
+                ['playerNoGun'] = 'Devi avere un\'arma in mano!',
+                ['playerTooFar'] = 'Il giocatore è troppo lontano!',
+
                 --Perquisire
                 ['searchPlayerLabel'] = 'Perquisici',
                 ['searchPlayerNotifTitle'] = 'Perquisici giocatore',
-                ['searchPlayerTooFar'] = 'Il giocatore è troppo lontano!',
-                ['searchPlayerNoGun'] = 'Devi avere un\'arma in mano!',
-                ['searchPlayerNoHandsup'] = 'Il giocatore non ha le mani alzate!',
                 ['searchPlayerProgbarLabel'] = 'Perquisendo giocatore...',
 
                 --Legare
@@ -31,15 +33,19 @@ Locale = {
                 ['tieHandsNotifTitle'] = 'Lega mani giocatore',
                 ['tieHandsTooFar'] = 'Il giocatore è troppo lontano!',
                 ['tieHandsNoItem'] = 'Devi avere delle fascette!',
+                ['tieHandsProgbarLabel'] = 'Legando mani al giocatore...',
         },
         
         ['en'] = {
+                --General
+                ['playerNoHandsup'] = 'Player isn\'t raising their hands!',
+                ['playerNoGun'] = 'You need to hold a weapon!',
+                ['playerTooFar'] = 'Player is too far!',
+
+
                 --Search player
                 ['searchPlayerLabel'] = 'Search player',
                 ['searchPlayerNotifTitle'] = 'Search player',
-                ['searchPlayerTooFar'] = 'Player is too far!',
-                ['searchPlayerNoGun'] = 'You need to hold a weapon!',
-                ['searchPlayerNoHandsup'] = 'Player isn\'t raising their hands!',
                 ['searchPlayerProgbarLabel'] = 'Searching player...',
 
                 --Tie hands
@@ -47,5 +53,6 @@ Locale = {
                 ['tieHandsNotifTitle'] = 'Tie player\'s hands',
                 ['tieHandsTooFar'] = 'Player is too far!',
                 ['tieHandsNoItem'] = 'You don\'t have any zipties!',
+                ['tieHandsProgbarLabel'] = 'Tying player\'s hands...',
         }
 }

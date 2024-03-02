@@ -18,10 +18,11 @@
 
 Config = {}
 
+Config.debug = true                                 --Prints some stuff on the server for debug purposes.
+
 --General configuration
 Config.locale = 'it'                                --Language. Current options: 'en' | 'it'
-Config.useCustomNotification = false                --Wether (false) or not (true) to use ox_lib's notifications. If true, check functions.lua in the client folder.
-Config.useCustomProgbar = false                     --Wether (false) or not (true) to use ox_lib's progress bar. If true, check functions.lua in the client folder.
+Config.useCustomNotification = true                 --Wether (false) or not (true) to use ox_lib's notifications. If true, check functions.lua in the client folder.
 Config.targetDistance = 2                           --Distance at which the target menu is visible. You might wanna change this.
 
 --Player search configuration
@@ -29,3 +30,10 @@ Config.timeToSearch = 3 * 1000                      --Time (in seconds) it takes
 Config.raiseHandsDict = 'random@mugging3'           --The animation dictionary for the handsup animation your animation script uses. If unsure, contact your animation script's developer.
 Config.raiseHandsAnim = 'handsup_standing_base'     --The animation for the handsup animation your animation script uses. If unsure, contact your animation script's developer.
 Config.searchPlayerDistance = 1                     --Distance at which players are able to search other players. You most likely won't need to change this.
+
+--Player tie/untie hands configuration
+Config.timeToTie = 2 * 1000                         --Time (in seconds) it takes to tie a player's hands. Only change the single-digit number.
+Config.timeToUntie = 1 * 1000                      --Time (in seconds) it takes to untie a player's hands. Only change the single-digit number.
+Config.ziptieItemName = 'ziptie'                    --Your ox_inventory ziptie item name. If you installed the items following the installation i provided, there's no need to change this.
+Config.wirecutItemName = 'wirecutters'              --Your ox_inventory wirecutters item name. If you installed the items following the installation i provided, there's no need to change this.
+Config.ziptieSkillcheck = false                     --Wether (true) or not (false) to allow the target to try to escape when their hands are being tied

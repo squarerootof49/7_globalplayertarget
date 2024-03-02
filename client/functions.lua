@@ -34,32 +34,6 @@ RegisterNetEvent("sn_globalPlayerTarget:notify", function(notifTitle, notifMsg, 
 	exports['okokNotify']:Alert(notifTitle, notifMsg, notifDuration, notifType, true) --okokNotify example
 end)
 
-lib.callback.register("sn_globalPlayerTarget:progbar", function(progbarDuration, progbarLabel, progbarAnimDict, progbarAnim)
-
-    --Defaults to ox lib if Config.useCustomProgbar is set to false
-    if not Config.useCustomProgbar then
-        if lib.progressBar({
-            duration = progbarDuration,
-            label = progbarLabel,
-            useWhileDead = false,
-            canCancel = true,
-            disable = {
-                car = true,
-            },
-            anim = {
-                dict = progbarAnimDict,
-                clip = progbarAnim,
-            }
-        }) then
-            return true
-        else
-            return false
-        end
-    else
-        --Implement custom progbar here. Should return true/false depending if progbar finishes or not.
-    end
-end)
-
 --Function to check wether or not entity is playing handsup animation
 function IsRaisingHands(entity)
 	return IsEntityPlayingAnim(entity, Config.raiseHandsDict, Config.raiseHandsAnim, 1)

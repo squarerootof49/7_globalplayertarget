@@ -16,8 +16,7 @@
 --For support: azazel98x on Discord
 --Supporto: azazel98x su Discord
 
-
-local isSearching, searchEntity
+local inv = exports.ox_inventory
 
 exports.ox_target:addGlobalPlayer({
     {
@@ -27,49 +26,117 @@ exports.ox_target:addGlobalPlayer({
         distance = Config.targetDistance,
         onSelect = function(data)
 
-            --Entity carryover for handsdown thread 
-            searchEntity = data.entity
+            --Player search's target player entity for checks 
+            local searchEntity = data.entity
 
             --ServerID of player search's target player, for server checks
 		    local searchTarget = GetPlayerServerId(NetworkGetPlayerIndexFromPed(searchEntity))
 
-            --Hash of player's weapon, for server checks
-			local weaponHash = cache.weapon --TODO: check weapon on the server to avoid script kids opening an inventory with no weapon (weirdge but ok)
-
             --Handsup check
 			if not IsRaisingHands(searchEntity) then 
-				TriggerEvent("sn_globalPlayerTarget:notify", Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['searchPlayerNoHandsup'], 'error', 5000)
+				TriggerEvent("sn_globalPlayerTarget:notify", Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
 				return
 			end
 
-            --Effective target player search, with cb to avoid permanent inventory closing
-			lib.callback("sn_globalPlayerTarget:searchPlayer", false, function(cb)
-                isSearching = cb
-            end, searchTarget)
+            --Run checks
+            local checks = lib.callback.await("sn_globalPlayerTarget:runChecks", false, searchTarget)
+
+            --Store our state
+            local isSearching = checks
+
+            --If we didn't pass the checks, don't search
+            if not isSearching then
+                return
+            end
+
+            --Disarm the player
+            TriggerEvent('ox_inventory:disarm', cache.playerId, true)
+
+            if lib.progressBar({
+                duration = Config.timeToSearch,
+                label = Locale[Config.locale]['searchPlayerProgbarLabel'],
+                useWhileDead = false,
+                canCancel = true,
+                disable = {
+                    car = true,
+                    sprint = true,
+                    combat = true,
+                },
+                anim = {
+                    dict = 'anim@gangops@facility@servers@bodysearch@',
+                    clip = 'player_search',
+                }
+            }) then
+                --Effective target player search
+                TriggerServerEvent("sn_globalPlayerTarget:searchPlayer", searchTarget)
+            else
+                return
+            end
+
+            --Thread to close inventory if target puts their hands down
+            CreateThread(function()
+                while isSearching do
+                    --Statebag to check if inventory is open or not
+                    local invOpen = LocalPlayer.state.invOpen
+
+                    --Close searcher inventory if target isn't raising hands. Checks with invOpen to ensure some security
+                    if not IsRaisingHands(searchEntity) and invOpen then
+                        inv:closeInventory()
+                        isSearching = false
+                    end
+                Wait(500)
+                end
+            end)
         end
     },
     {
-        name = 'ox_target:searchPlayer',
+        name = 'ox_target:tieHands',
         icon = 'fa-solid fa-hands-bound',
         label = Locale[Config.locale]['tieHandsLabel'],
         distance = Config.targetDistance,
         onSelect = function(data)
+            --Hand tie's target player entity for checks 
+            local tieEntity = data.entity
 
+            --ServerID of hand tie's target player, for server checks
+		    local tieTarget = GetPlayerServerId(NetworkGetPlayerIndexFromPed(tieEntity))
+
+            --Handsup check
+			if not IsRaisingHands(tieEntity) then 
+				TriggerEvent("sn_globalPlayerTarget:notify", Locale[Config.locale]['tieHandsNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
+				return
+			end
+
+            --Run checks
+            local checks = lib.callback.await("sn_globalPlayerTarget:runChecks", false, tieTarget)
+
+            --If we didn't pass the checks, don't tie
+            if not checks then
+                return
+            end
+
+            if lib.progressBar({
+                duration = Config.timeToTie,
+                label = Locale[Config.locale]['tieHandsProgbarLabel'],
+                useWhileDead = false,
+                canCancel = true,
+                disable = {
+                    car = true,
+                    sprint = true,
+                    combat = true,
+                },
+                anim = {
+                    dict = 'anim@gangops@facility@servers@bodysearch@',
+                    clip = 'player_search',
+                }
+            }) then
+                --Effective target player tieHands
+                
+            else
+                return
+            end
         end
     },
 })
 
---Target handsdown thread
-CreateThread(function()
-    while true do
-        --Statebag to check if inventory is open or not
-        local invOpen = LocalPlayer.state.invOpen
 
-        --Multiple checks to ensure maximum closeInventory security
-        if isSearching and not IsRaisingHands(searchEntity) and invOpen then
-                exports.ox_inventory:closeInventory()
-                isSearching = false
-        end
-    Wait(500)
-    end
-end)

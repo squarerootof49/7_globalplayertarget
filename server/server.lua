@@ -53,7 +53,6 @@ RegisterNetEvent("7_globalPlayerTarget:tieHands", function(target)
 	--Saving source for tick safety, unsure how this works. Can i just use source all over?
 	local playerID = source
 
-	--Player search
-	inv:forceOpenInventory(playerID, 'player', target)
+	--WIP
 end)
 

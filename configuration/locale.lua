@@ -28,7 +28,7 @@ Locale = {
                 ['searchPlayerNotifTitle'] = 'Perquisici giocatore',
                 ['searchPlayerProgbarLabel'] = 'Perquisendo giocatore...',
 
-                --Legare
+                --Legare (INUTILIZZATO, IN VIA DI SVILUPPO)
                 ['tieHandsLabel'] = 'Lega mani',
                 ['tieHandsNotifTitle'] = 'Lega mani giocatore',
                 ['tieHandsTooFar'] = 'Il giocatore è troppo lontano!',
@@ -48,7 +48,7 @@ Locale = {
                 ['searchPlayerNotifTitle'] = 'Search player',
                 ['searchPlayerProgbarLabel'] = 'Searching player...',
 
-                --Tie hands
+                --Tie hands (UNUSED, WIP)
                 ['tieHandsLabel'] = 'Tie hands',
                 ['tieHandsNotifTitle'] = 'Tie player\'s hands',
                 ['tieHandsTooFar'] = 'Player is too far!',

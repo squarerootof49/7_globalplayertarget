@@ -90,6 +90,7 @@ exports.ox_target:addGlobalPlayer({
         end
     },
     {
+        -- WIP
         name = 'ox_target:tieHands',
         icon = 'fa-solid fa-hands-bound',
         label = Locale[Config.locale]['tieHandsLabel'],

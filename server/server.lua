@@ -20,19 +20,19 @@
 local inv = exports.ox_inventory
 
 --Checks cb
-lib.callback.register("sn_globalPlayerTarget:runChecks", function(source, target)
+lib.callback.register("7_globalPlayerTarget:runChecks", function(source, target)
 	--Saving source for tick safety, unsure how this works. Can i just use source all over?
 	local playerID = source
 
 	--Held weapon check
 	if not IsHoldingWeapon(playerID) then
-		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoGun'], 'error', 5000)
+		TriggerClientEvent("7_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoGun'], 'error', 5000)
 		return false
 	end
 
 	--Distance check
 	if DistanceCheck(playerID, target) then
-		TriggerClientEvent("sn_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerTooFar'], 'error', 5000)
+		TriggerClientEvent("7_globalPlayerTarget:notify", playerID, Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerTooFar'], 'error', 5000)
 		return false
 	end
 
@@ -40,7 +40,7 @@ lib.callback.register("sn_globalPlayerTarget:runChecks", function(source, target
 end)
 
 --Search player event
-RegisterNetEvent("sn_globalPlayerTarget:searchPlayer", function(target)
+RegisterNetEvent("7_globalPlayerTarget:searchPlayer", function(target)
 	--Saving source for tick safety, unsure how this works. Can i just use source all over?
 	local playerID = source
 
@@ -49,7 +49,7 @@ RegisterNetEvent("sn_globalPlayerTarget:searchPlayer", function(target)
 end)
 
 --Tie hands event
-RegisterNetEvent("sn_globalPlayerTarget:tieHands", function(target)
+RegisterNetEvent("7_globalPlayerTarget:tieHands", function(target)
 	--Saving source for tick safety, unsure how this works. Can i just use source all over?
 	local playerID = source
 

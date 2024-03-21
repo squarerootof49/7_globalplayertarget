@@ -17,7 +17,7 @@
 --Supporto: azazel98x su Discord
 
 --Implement your own notification system or use exports/events from your current notification system. Below is provided an example with okokNotify
-RegisterNetEvent("sn_globalPlayerTarget:notify", function(notifTitle, notifMsg, notifType, notifDuration)
+RegisterNetEvent("7_globalPlayerTarget:notify", function(notifTitle, notifMsg, notifType, notifDuration)
 
     --Defaults to ox lib if Config.useCustomNotification is set to false
     if not Config.useCustomNotification then

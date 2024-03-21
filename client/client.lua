@@ -34,12 +34,12 @@ exports.ox_target:addGlobalPlayer({
 
             --Handsup check
 			if not IsRaisingHands(searchEntity) then 
-				TriggerEvent("sn_globalPlayerTarget:notify", Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
+				TriggerEvent("7_globalPlayerTarget:notify", Locale[Config.locale]['searchPlayerNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
 				return
 			end
 
             --Run checks
-            local checks = lib.callback.await("sn_globalPlayerTarget:runChecks", false, searchTarget)
+            local checks = lib.callback.await("7_globalPlayerTarget:runChecks", false, searchTarget)
 
             --Store our state
             local isSearching = checks
@@ -68,7 +68,7 @@ exports.ox_target:addGlobalPlayer({
                 }
             }) then
                 --Effective target player search
-                TriggerServerEvent("sn_globalPlayerTarget:searchPlayer", searchTarget)
+                TriggerServerEvent("7_globalPlayerTarget:searchPlayer", searchTarget)
             else
                 return
             end
@@ -103,12 +103,12 @@ exports.ox_target:addGlobalPlayer({
 
             --Handsup check
 			if not IsRaisingHands(tieEntity) then 
-				TriggerEvent("sn_globalPlayerTarget:notify", Locale[Config.locale]['tieHandsNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
+				TriggerEvent("7_globalPlayerTarget:notify", Locale[Config.locale]['tieHandsNotifTitle'], Locale[Config.locale]['playerNoHandsup'], 'error', 5000)
 				return
 			end
 
             --Run checks
-            local checks = lib.callback.await("sn_globalPlayerTarget:runChecks", false, tieTarget)
+            local checks = lib.callback.await("7_globalPlayerTarget:runChecks", false, tieTarget)
 
             --If we didn't pass the checks, don't tie
             if not checks then

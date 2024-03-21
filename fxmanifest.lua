@@ -23,7 +23,7 @@ lua54 'yes'
 
 description 'Seven\'s ox_target global player target (GPT)'
 author 'Seven (azazel98x on Discord)'
-version '0.2.1-alpha'
+version '1.0.0'
 
 shared_scripts {
   '@ox_lib/init.lua',

@@ -38,3 +38,4 @@ end)
 function IsRaisingHands(entity)
 	return IsEntityPlayingAnim(entity, Config.raiseHandsDict, Config.raiseHandsAnim, 1)
 end
+
